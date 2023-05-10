@@ -5,8 +5,8 @@ import { ContactCard } from "../component/ContactCard.js";
 import { Modal } from "../component/Modal";
 
 export const Contacts = () => {
-	const { store } = useContext(Context);
-	console.log(store.listaContactos);
+	const { store, actions } = useContext(Context);
+	// console.log(store.listaContactos);
 
 	const [state, setState] = useState({
 		showModal: false
@@ -25,7 +25,7 @@ export const Contacts = () => {
 						{store.listaContactos.map((item, index) => (
 							<ContactCard
 								key={index}
-								fullName={item.fullName}
+								fullName={item.full_name}
 								onDelete={() => setState({ showModal: true })}
 							/>
 						))}

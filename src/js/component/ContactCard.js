@@ -17,7 +17,7 @@ export const ContactCard = props => {
 				</div>
 				<div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
 					<div className=" float-right">
-						<button className="btn">
+						<button className="btn" onClick={() => props.actualizarContactos()}>
 							<i className="fas fa-pencil-alt mr-3" />
 						</button>
 						<button className="btn" onClick={() => props.onDelete()}>
@@ -27,7 +27,7 @@ export const ContactCard = props => {
 					<label className="name lead">{props.fullName}</label>
 					<br />
 					<i className="fas fa-map-marker-alt text-muted mr-3" />
-					<span className="text-muted">5842 Hillcrest Rd</span>
+					<span className="text-muted">{props.address}</span>
 					<br />
 					<span
 						className="fa fa-phone fa-fw text-muted mr-3"
@@ -35,7 +35,7 @@ export const ContactCard = props => {
 						title=""
 						data-original-title="(870) 288-4149"
 					/>
-					<span className="text-muted small">(870) 288-4149</span>
+					<span className="text-muted small">{props.phone}</span>
 					<br />
 					<span
 						className="fa fa-envelope fa-fw text-muted mr-3"
@@ -43,7 +43,7 @@ export const ContactCard = props => {
 						data-original-title=""
 						title=""
 					/>
-					<span className="text-muted small text-truncate">mike.ana@example.com</span>
+					<span className="text-muted small text-truncate">{props.email}</span>
 				</div>
 			</div>
 		</li>
@@ -57,7 +57,11 @@ export const ContactCard = props => {
 ContactCard.propTypes = {
 	history: PropTypes.object,
 	onDelete: PropTypes.func,
-	fullName: PropTypes.string
+	fullName: PropTypes.string,
+	address: PropTypes.string,
+	phone: PropTypes.number,
+	email: PropTypes.string,
+	actualizarContactos: PropTypes.func
 };
 
 /**
