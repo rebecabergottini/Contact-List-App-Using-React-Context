@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import MikePhoto from "../../img/m101.jpg";
+import { Context } from "../store/appContext";
 
 export const ContactCard = props => {
 	const [state, setState] = useState({
 		//initialize state here
 	});
-	console.log(props.fullName);
+	const { actions } = useContext(Context);
 
 	return (
 		<li className="list-group-item">
@@ -17,7 +18,7 @@ export const ContactCard = props => {
 				</div>
 				<div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
 					<div className=" float-right">
-						<button className="btn" onClick={() => props.actualizarContactos()}>
+						<button className="btn" onClick={() => props.editarContactos()}>
 							<i className="fas fa-pencil-alt mr-3" />
 						</button>
 						<button className="btn" onClick={() => props.onDelete()}>
@@ -58,10 +59,11 @@ ContactCard.propTypes = {
 	history: PropTypes.object,
 	onDelete: PropTypes.func,
 	fullName: PropTypes.string,
-	address: PropTypes.string,
-	phone: PropTypes.number,
 	email: PropTypes.string,
-	actualizarContactos: PropTypes.func
+	address: PropTypes.string,
+	phone: PropTypes.string,
+	id: PropTypes.string,
+	editarContactos: PropTypes.func
 };
 
 /**

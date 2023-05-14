@@ -10,6 +10,11 @@ export const Modal = props => {
 		//initialize state here
 	});
 
+	const handleDeleteContact = id => {
+		actions.onDelete(props.id);
+		props.onClose();
+	};
+
 	return (
 		<div className="modal" tabIndex="-1" role="dialog" style={{ display: props.show ? "inline-block" : "none" }}>
 			<div className="modal-dialog" role="document">
@@ -33,16 +38,14 @@ export const Modal = props => {
 						<p>Warning: unknown consequences after this point... Kidding!</p>
 					</div>
 					<div className="modal-footer">
-						<button type="button" className="btn btn-primary">
+						<button type="button" onClick={() => props.onClose()} className="btn btn-primary">
 							Oh no!
 						</button>
 						<button
 							type="button"
 							className="btn btn-secondary"
 							data-dismiss="modal"
-							onClick={() => {
-								actions.onDelete(props.id);
-							}}>
+							onClick={handleDeleteContact}>
 							Do it!
 						</button>
 					</div>

@@ -16,6 +16,7 @@ export const AddContact = () => {
 		e.preventDefault();
 		actions.agregarContacto(fullName, email, phone, address);
 	}
+
 	return (
 		<div className="container">
 			<div>

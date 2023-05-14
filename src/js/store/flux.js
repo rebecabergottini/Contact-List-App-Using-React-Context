@@ -1,3 +1,5 @@
+import { objectOf } from "prop-types";
+
 const getState = ({ getStore, setStore }) => {
 	return {
 		store: {
@@ -9,6 +11,7 @@ const getState = ({ getStore, setStore }) => {
 			agregarContacto: (fullName, email, phone, address) => {
 				fetch("https://assets.breatheco.de/apis/fake/contact/", {
 					method: "POST",
+					headers: { "Content-type": "application/json;charset=UTF-8" },
 					body: JSON.stringify({
 						full_name: fullName,
 						email: email,
@@ -24,15 +27,19 @@ const getState = ({ getStore, setStore }) => {
 
 			// Solicitud GET (Request).
 			obtenerContactos: () => {
-				fetch("https://assets.breatheco.de/apis/fake/contact/agenda/rebecabergo")
+				fetch("https://assets.breatheco.de/apis/fake/contact/agenda/rebecabergo", {
+					method: "GET",
+					headers: { "Content-type": "application/json;charset=UTF-8" }
+				})
 					.then(response => response.json())
 					.then(data => setStore({ listaContactos: data }))
 					.catch(err => console.log("Solicitud fallida", err));
 			},
 
-			actualizarContactos: (id, fullName, email, phone, address) => {
+			editarContactos: (id, fullName, email, phone, address) => {
 				fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
 					method: "PUT",
+					headers: { "Content-type": "application/json; charset=UTF-8" },
 					body: JSON.stringify({
 						full_name: fullName,
 						email: email,
@@ -52,7 +59,7 @@ const getState = ({ getStore, setStore }) => {
 					headers: { "Content-type": "application/json; charset=UTF-8" }
 				})
 					.then(response => response.json())
-					.then(data => console.log(data))
+					.then(data => setStore({ listaContactos: data }))
 					.catch(err => console.log(err));
 			}
 		}

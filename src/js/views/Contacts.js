@@ -7,11 +7,10 @@ import { Modal } from "../component/Modal";
 export const Contacts = () => {
 	const { store, actions } = useContext(Context);
 	// console.log(store.listaContactos);
-
 	const [state, setState] = useState({
 		showModal: false
 	});
-
+	// console.log(store.contactList);
 	return (
 		<div className="container">
 			<div>
@@ -22,11 +21,15 @@ export const Contacts = () => {
 				</p>
 				<div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
 					<ul className="list-group pull-down" id="contact-list">
-						{store.listaContactos.map((item, index) => (
+						{store.listaContactos.map(item => (
 							<ContactCard
-								key={index}
 								fullName={item.full_name}
-								onDelete={() => setState({ showModal: true })}
+								email={item.email}
+								phone={item.phone}
+								address={item.address}
+								key={item.id}
+								id={item.id}
+								onDelete={actions.onDelete}
 							/>
 						))}
 						{/* <ContactCard />
