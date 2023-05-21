@@ -1,16 +1,28 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Context } from "../store/appContext.js";
+
 import { ContactCard } from "../component/ContactCard.js";
 import { Modal } from "../component/Modal";
+import { ModalEdit } from "../component/ModalEdit.js";
+import { Context } from "../store/appContext.js";
 
 export const Contacts = () => {
 	const { store, actions } = useContext(Context);
-	// console.log(store.listaContactos);
 	const [state, setState] = useState({
-		showModal: false
+		showModal: false,
+		id: undefined
 	});
-	// console.log(store.contactList);
+	const [edit, setEdit] = useState({
+		showModal: false,
+		id: undefined
+	});
+
+	// El useEffect funciona como un onload y ejecuta el codigo que tiene dentro apenas se carga el componente.
+	useEffect(() => {
+		actions.obtenerContactos();
+	}, []);
+
+	console.log(store.listaContactos);
 	return (
 		<div className="container">
 			<div>
@@ -29,7 +41,8 @@ export const Contacts = () => {
 								address={item.address}
 								key={item.id}
 								id={item.id}
-								onDelete={actions.onDelete}
+								onDelete={() => setState({ showModal: true, id: item.id })}
+								edit={() => setEdit({ showModal: true, id: item.id })}
 							/>
 						))}
 						{/* <ContactCard />
@@ -38,7 +51,8 @@ export const Contacts = () => {
 					</ul>
 				</div>
 			</div>
-			<Modal show={state.showModal} onClose={() => setState({ showModal: false })} />
+			<Modal id={state.id} show={state.showModal} onClose={() => setState({ showModal: false })} />
+			<ModalEdit id={edit.id} show={edit.showModal} onClose={() => setEdit({ showModal: false })} />
 		</div>
 	);
 };

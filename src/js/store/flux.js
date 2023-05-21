@@ -1,5 +1,3 @@
-import { objectOf } from "prop-types";
-
 const getState = ({ getStore, setStore }) => {
 	return {
 		store: {
@@ -36,17 +34,20 @@ const getState = ({ getStore, setStore }) => {
 					.catch(err => console.log("Solicitud fallida", err));
 			},
 
-			editarContactos: (id, fullName, email, phone, address) => {
+			editarContactos: (id, fullName, phone, email, address) => {
 				fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
 					method: "PUT",
 					headers: { "Content-type": "application/json; charset=UTF-8" },
-					body: JSON.stringify({
-						full_name: fullName,
-						email: email,
-						agenda_slug: "rebecabergo",
-						address: address,
-						phone: phone
-					})
+					body: JSON.stringify(
+						{
+							full_name: fullName,
+							agenda_slug: "rebecabergo",
+							email: email,
+							address: address,
+							phone: phone
+						},
+						console.log(fullName)
+					)
 				})
 					.then(response => response.json())
 					.then(data => console.log(data))
@@ -59,7 +60,7 @@ const getState = ({ getStore, setStore }) => {
 					headers: { "Content-type": "application/json; charset=UTF-8" }
 				})
 					.then(response => response.json())
-					.then(data => setStore({ listaContactos: data }))
+					.then(data => console.log(data))
 					.catch(err => console.log(err));
 			}
 		}
